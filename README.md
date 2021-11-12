@@ -1,13 +1,20 @@
-# Syriatel-Customer-Churn
+# SyriaTel-Customer-Churn
 
 SyriaTel Churning Analysis
 Natalia Edelson
 
+![competetive-advantage](https://user-images.githubusercontent.com/44559346/141393806-e233960f-df8b-4fe0-b6be-27fd472518e7.jpeg)
 
 
 Telecom companies have been facing the increasing challenge of customer’s attrition. Telecom companies are focused on predicting customer churn in order to avoid a major fall in their revenue. It’s often the case that onboarding a new customer is more costly than retaining an existing client. For the purpose of this case study, we will gather data of the telecom company SyriaTel and our analysis will be centered around the possible ways it can reduce its churn.
 
 SyriaTel had seen 14.5% of customers leave their business. We built an analysis using Python with Scikit-Learn to find the important factors contributing to customer churn the most. We built a predicting model to allow us to obtain the insight of the features that should be closely monitored in order to reduce customer churn in SyrianTel.
+
+
+
+![newplot](https://user-images.githubusercontent.com/44559346/141393825-5ae4612e-6b6c-4b26-a27e-757eb6b65f80.png)
+
+
 
 
 
@@ -64,35 +71,26 @@ display(Customer_Churn.describe())
 
 We compare the mean versus the max and min values in order to sort outliers or potential mistakes. There are no outliers in this data. Overall, the data is clean. It doesn’t have missing values nor unnecessary fillers. (In the coding on Github one can find more details on the unhelpful variables we chose to omit).
 
-Exploring the Data
+**Exploring the Data
+
 In a classified problem it is important to check whether the data is imbalanced. When we start building our model it will be key to take this into account when evaluating the results.
-
-
 
 We can see the data is not balanced as 85% of people are not churning.
 
 Below we check the correlation between variables, and we will examine the ones that show a strong correlation.
 
-sns.set(style="white")
 
-corr = Customer_Churn.corr().round(2)
-
-mask = np.triu(np.ones_like(corr, dtype=bool))
-mask[np.triu_indices_from(mask)] = True
-
-f, ax = plt.subplots(figsize=(14, 12))
-
-# Generate a custom diverging colormap
-cmap = sns.diverging_palette(220, 20, as_cmap=True)
-
-# Draw the heatmap with the mask and correct aspect ratio
-sns.heatmap(corr, mask=mask, cmap=cmap, vmax=1, center=0,
-            square=True, linewidths=.5, cbar_kws={"shrink": .5})
-
-plt.title(' Costumer Churn Variables - Correlation Matric Hat Map ')
+![Corr](https://user-images.githubusercontent.com/44559346/141393888-8c2eba21-6183-4c6f-a818-254cd2d7441b.png)
 
 
 We can clearly see the higher number of Customer Service calls will likely lead to a customer leaving. Particularly after three calls, we saw an increase in churning.
+
+
+
+
+
+![Customer calls ](https://user-images.githubusercontent.com/44559346/141393943-927e95c5-b36d-430e-9109-d9571fa298b4.png)
+
 
 
 
@@ -100,11 +98,17 @@ In the total day charge, we can see that customers are much more likely to churn
 
 
 
+
+![TDC](https://user-images.githubusercontent.com/44559346/141393954-ae6d68d0-31a3-4afc-85c8-80b83e0dc367.png)
+
+
+
 We saw a similar pattern in the evening charge but with a more concentrated dollar amount. Roughly speaking, customers who were charged above $18 for the evening calls are much more likely to churn.
 
+![TEC](https://user-images.githubusercontent.com/44559346/141393959-9e9e0401-43a0-40bd-8ee3-aae6562a8888.png)
 
 
-Building Classified Models
+**Building Classified Models
 
 Our supervised learning task is a classification problem and therefore we will be labeling the data and then scaling it. We create ‘x’ and ‘y’ by selecting ‘churn’ from the dataset and then we create an 80/20 split on the dataset for training/test. We use random_state=10 to achieve reproducible results. We scale the data using the Standard Scaler method and standardize the data by making the mean of the distribution zero and the majority of the data will be between -1 and 1.
 
@@ -129,46 +133,44 @@ We also utilize the cross-validation score – which uses five different validat
 
 We compare separately how well the two different classes (churn or no churn) were predicted by using classification reporting.
 
-We can’t rely on accuracy because it gives us deceiving results as our data is imbalanced.
-
-
-
-The highest recall results were in XG Boost.
-
+We can’t rely on accuracy because it gives us deceiving results as our data is imbalanced. The highest recall results were in XG Boost.
 
 
 We investigate which features have the most impact on the accuracy of our trained model XG Boost.
 
 
+![FEATURES OF IMPO](https://user-images.githubusercontent.com/44559346/141394009-c32aeada-1e59-434d-815e-39be13048f21.png)
 
-Features of Importance
 
-Voicemail Plan
+
+*** Features of Importance
+
+** Voicemail Plan
 
 We found a voicemail plan stood out as one of the most important features. As seen in the graph, people with a voicemail plan are twice as less likely to churn.
 
 Therefore, we recommend offering voicemail plans to customers who do not have them as part of the incentives used to retain customers. Perhaps when a customer calls the second or third time, SyrianTel can offer them a voicemail plan as a promotion if they don’t currently have one.
 
-International Plan
+**International Plan
 
 An international plan was also an important feature. Customers who had an international plan were four times as likely to churn. This is an element SyriaTel should focus on. Perhaps they could consider eliminating this specific plan and offer one reoccurring plan for all.
 
-Customer Service calls
+**Customer Service Calls
 
 As expected, Customer Service calls were shown to be an important feature. As we see above, customers are five times more likely to churn after the third call. This supports our suggestion of offering an incentive to stay after the second and third call. SyriaTel can offer three weeks free of charge before subscribing for a year or as mentioned above, gift a customer a voicemail plan for three weeks as well.
 
-States
+**States
 
-In addition to the states mentioned above, Oregon (OR) should be flagged, as it came out to be an important feature. Customer Service should be aware of the states that customers are calling from. We recommend exploring the possibility of partnering with other companies. For instance – if a customer from Oregon calls the second time and already has a voicemail plan, one incentive could be to offer a gift from another vendor such as Uber EATS – e.g. a $10 credit to order food which might incentivize the client to stay.
+In addition to the states mentioned on GitHub, Oregon (OR) should be flagged, as it came out to be an important feature. Customer Service should be aware of the states that customers are calling from. We recommend exploring the possibility of partnering with other companies. For instance – if a customer from Oregon calls the second time and already has a voicemail plan, one incentive could be to offer a gift from another vendor such as Uber EATS – e.g. a $10 credit to order food which might incentivize the client to stay.
 
-Next Step
+**Next Step**
 
-We would like to gather more data on the specific dates of churning. Ideally, we would be able to look at an individual account and learn the dates of onboarding and subsequently leaving.
+- We would like to gather more data on the specific dates of churning. Ideally, we would be able to look at an individual account and learn the dates of onboarding and subsequently leaving.
 
-We will look closely into the customer satisfaction. We would like to evaluate the cost of offering a survey once a Customer Service call is complete. We will monitor how long a customer waited before his request was answered.
+- We will look closely into the customer satisfaction. We would like to evaluate the cost of offering a survey once a Customer Service call is complete. We will monitor how long a customer waited before his request was answered.
 
-We will examine whether a flat fee per month would be more cost-effective than the current method of charge per minute.
+- We will examine whether a flat fee per month would be more cost-effective than the current method of charge per minute.
 
-Additionally, we will consider using a different vendor or temporally partnering to offer incentives and promotions when a customer seems dissatisfied. This may increase satisfaction and reduce churning.
+- Additionally, we will consider using a different vendor or temporally partnering to offer incentives and promotions when a customer seems dissatisfied. This may increase satisfaction and reduce churning.
 
-Ultimately, we will implement the new features to see whether churning was reduced and calculate the cost of retaining the customers.
+- Ultimately, we will implement the new features to see whether churning was reduced and calculate the cost of retaining the customers.
