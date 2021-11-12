@@ -1,6 +1,5 @@
-# SyriaTel-Customer-Churn
+# SyriaTel Churning Analysis
 
-SyriaTel Churning Analysis
 Natalia Edelson
 
 ![competetive-advantage](https://user-images.githubusercontent.com/44559346/141393806-e233960f-df8b-4fe0-b6be-27fd472518e7.jpeg)
