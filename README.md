@@ -1,4 +1,4 @@
-# SyriaTel Churning Analysis
+# SyriaTel Churn Analysis
 
 Natalia Edelson
 
